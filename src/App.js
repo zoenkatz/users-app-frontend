@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useContext, useReducer} from 'react';
+import UsersContext from './UsersContext';
+import UsersReducer from './UsersReducer';
+import './App.scss';
+import UsersTable from "./components/UsersTable";
+import UsersControlBar from "./components/UsersControlBar";
+import AddUser from './components/AddUser';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const initialState = useContext(UsersContext);
+    const [state, dispatch] = useReducer(UsersReducer, initialState);
+
+    return (
+        <UsersContext.Provider value={{state, dispatch}}>
+            <div className='users-app'>
+                <div className='users-app-content'>
+                    <div className="main-app">
+                        <UsersControlBar/>
+                        <div className="users-app-table">
+                            <UsersTable/>
+                        </div>
+                    </div>
+                    {state.showUserForm ?
+                        (<div className="side-app">
+                            <div className="users-app-new-user">
+                                <AddUser/>
+                            </div>
+                        </div>) : ''}
+                </div>
+            </div>
+        </UsersContext.Provider>
+    );
 }
 
 export default App;
