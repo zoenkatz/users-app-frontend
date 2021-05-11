@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "final-form": "^4.19.1",
     "final-form-arrays": "^3.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-debounce-input": "^3.2.2",
